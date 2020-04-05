@@ -7,7 +7,7 @@ namespace Shlinkio\Shlink\Rest;
 use Doctrine\DBAL\Connection;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use Laminas\ServiceManager\Factory\InvokableFactory;
-use Mezzio\Router\Middleware\ImplicitOptionsMiddleware;
+use Mezzio\Router\Middleware\{ImplicitHeadMiddleware, ImplicitHeadMiddlewareFactory, ImplicitOptionsMiddleware, ImplicitOptionsMiddlewareFactory};
 use Psr\Log\LoggerInterface;
 use Shlinkio\Shlink\Core\Options\AppOptions;
 use Shlinkio\Shlink\Core\Service;
@@ -33,7 +33,8 @@ return [
             Action\Tag\CreateTagsAction::class => ConfigAbstractFactory::class,
             Action\Tag\UpdateTagAction::class => ConfigAbstractFactory::class,
 
-            ImplicitOptionsMiddleware::class => Middleware\EmptyResponseImplicitOptionsMiddlewareFactory::class,
+            ImplicitOptionsMiddleware::class => ImplicitOptionsMiddlewareFactory::class,
+            ImplicitHeadMiddleware::class => ImplicitHeadMiddlewareFactory::class,
             Middleware\BodyParserMiddleware::class => InvokableFactory::class,
             Middleware\CrossDomainMiddleware::class => InvokableFactory::class,
             Middleware\ShortUrl\CreateShortUrlContentNegotiationMiddleware::class => InvokableFactory::class,
